@@ -96,7 +96,6 @@ public class Computer {
             System.out.println("The computer was switched on!");
             isAlive = true;
             cycle++;
-
         }else {
             System.out.println("The computer was broken!");
             isAlive = false;
