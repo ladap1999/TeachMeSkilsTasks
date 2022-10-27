@@ -20,60 +20,6 @@ public class Computer {
         this.lifetime = lifetime;
     }
 
-    public String getCpu() {
-        return cpu;
-    }
-
-    public void setCpu(String cpu) {
-        this.cpu = cpu;
-    }
-
-    public int getRam() {
-        return ram;
-    }
-
-    public void setRam(int ram) {
-        this.ram = ram;
-    }
-
-    public int getHdd() {
-        return hdd;
-    }
-
-    public void setHdd(int hdd) {
-        this.hdd = hdd;
-    }
-
-    public int getLifetime() {
-        return lifetime;
-    }
-
-    public void setLifetime(int lifetime) {
-        this.lifetime = lifetime;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Computer computer = (Computer) o;
-
-        if (ram != computer.ram) return false;
-        if (hdd != computer.hdd) return false;
-        if (lifetime != computer.lifetime) return false;
-        return cpu.equals(computer.cpu);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = cpu.hashCode();
-        result = 31 * result + ram;
-        result = 31 * result + hdd;
-        result = 31 * result + lifetime;
-        return result;
-    }
-
     @Override
     public String toString() {
         return "Computer{" +
