@@ -3,6 +3,9 @@ package com.homework7;
 import java.util.Scanner;
 
 public class Menu {
+    static double[] memory = new double[3];
+    static int point = 0;
+
     public void work() {
         double firstNumber;
         double secondNumber;
@@ -22,6 +25,7 @@ public class Menu {
                     System.out.println("Continue working: ");
                 } else if (option.equals("2")) {
                     i++;
+                    printArray(memory);
                     System.out.println("Will be glad to see you again. Bye!");
                 } else {
                     System.out.println("This option can not be processed. Try to enter 1 or 2.");
@@ -59,20 +63,42 @@ public class Menu {
         Division div = new Division();
         switch (enterString()) {
             case "+":
-                sum.action(a, b);
+                double rez1 = sum.action(a, b);
+                fillingMemory(rez1);
                 break;
             case "-":
-                minus.action(a, b);
+                double rez2 = minus.action(a, b);
+                fillingMemory(rez2);
                 break;
             case "*":
-                multiple.action(a, b);
+                double rez3 = multiple.action(a, b);
+                fillingMemory(rez3);
                 break;
             case "/":
-                div.action(a, b);
+                double rez4 = div.action(a, b);
+                fillingMemory(rez4);
                 break;
             default:
                 System.out.println(" The operation can not be processed. Try to enter '+','-','*','/'");
                 throw new IllegalArgumentException();
+        }
+    }
+
+    private void fillingMemory(double num) {
+        for (; point < memory.length; ) {
+            memory[point] = num;
+            point++;
+            break;
+        }
+
+        if (point == memory.length) {
+            point = 0;
+        }
+    }
+
+    private void printArray(double[] array) {
+        for (double element : array) {
+            System.out.print(element + "  ");
         }
     }
 }
