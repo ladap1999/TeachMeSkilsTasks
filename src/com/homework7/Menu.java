@@ -1,9 +1,12 @@
 package com.homework7;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class Menu {
+public class Menu implements MemoryStorage {
     static double[] memory = new double[3];
+    ArrayList<Double> resultAfterAction = new ArrayList<>();
     static int point = 0;
 
     public void work() {
@@ -26,7 +29,8 @@ public class Menu {
                 } else if (option.equals("2")) {
                     i++;
                     printArray(memory);
-                    System.out.println("Will be glad to see you again. Bye!");
+                    printCollection(resultAfterAction);
+                    System.out.println("\nWill be glad to see you again. Bye!");
                 } else {
                     System.out.println("This option can not be processed. Try to enter 1 or 2.");
                     throw new IllegalArgumentException();
@@ -64,19 +68,23 @@ public class Menu {
         switch (enterString()) {
             case "+":
                 double rez1 = sum.action(a, b);
-                fillingMemory(rez1);
+                fillingMemoryByArray(rez1);
+                fillingMemoryByCollection(rez1);
                 break;
             case "-":
                 double rez2 = minus.action(a, b);
-                fillingMemory(rez2);
+                fillingMemoryByArray(rez2);
+                fillingMemoryByCollection(rez2);
                 break;
             case "*":
                 double rez3 = multiple.action(a, b);
-                fillingMemory(rez3);
+                fillingMemoryByArray(rez3);
+                fillingMemoryByCollection(rez3);
                 break;
             case "/":
                 double rez4 = div.action(a, b);
-                fillingMemory(rez4);
+                fillingMemoryByArray(rez4);
+                fillingMemoryByCollection(rez4);
                 break;
             default:
                 System.out.println(" The operation can not be processed. Try to enter '+','-','*','/'");
@@ -84,7 +92,22 @@ public class Menu {
         }
     }
 
-    private void fillingMemory(double num) {
+    private void printArray(double[] array) {
+        System.out.println("История операций в массиве:");
+        for (double element : array) {
+            System.out.print(element + "  ");
+        }
+    }
+
+    private void printCollection(ArrayList<Double> collection) {
+        System.out.println("\nИстория операций в коллекции:");
+        for (double element : collection) {
+            System.out.print(element + "  ");
+        }
+    }
+
+    @Override
+    public void fillingMemoryByArray(double num) {
         for (; point < memory.length; ) {
             memory[point] = num;
             point++;
@@ -96,9 +119,8 @@ public class Menu {
         }
     }
 
-    private void printArray(double[] array) {
-        for (double element : array) {
-            System.out.print(element + "  ");
-        }
+    @Override
+    public void fillingMemoryByCollection(double num) {
+        resultAfterAction.add(num);
     }
 }
