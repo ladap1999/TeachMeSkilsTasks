@@ -3,8 +3,7 @@ package com.homework7;
 import java.util.Scanner;
 
 public class Menu {
-    static double[] memory = new double[3];
-    static int point = 0;
+    StorageFunction storageFunction = new StorageFunction();
 
     public void work() {
         double firstNumber;
@@ -25,8 +24,10 @@ public class Menu {
                     System.out.println("Continue working: ");
                 } else if (option.equals("2")) {
                     i++;
-                    printArray(memory);
-                    System.out.println("Will be glad to see you again. Bye!");
+                    StorageFunction.printArray(storageFunction.getMemory());
+                    StorageFunction.printCollection(storageFunction.getResultAfterAction());
+                    StorageFunction.printMapCollection(storageFunction.getStorageForAction());
+                    System.out.println("\nWill be glad to see you again. Bye!");
                 } else {
                     System.out.println("This option can not be processed. Try to enter 1 or 2.");
                     throw new IllegalArgumentException();
@@ -64,41 +65,31 @@ public class Menu {
         switch (enterString()) {
             case "+":
                 double rez1 = sum.action(a, b);
-                fillingMemory(rez1);
+                storageFunction.fillingMemoryByArray(rez1);
+                storageFunction.fillingMemoryByCollection(rez1);
+                storageFunction.fillingMemoryByMapCollection("+", rez1);
                 break;
             case "-":
                 double rez2 = minus.action(a, b);
-                fillingMemory(rez2);
+                storageFunction.fillingMemoryByArray(rez2);
+                storageFunction.fillingMemoryByCollection(rez2);
+                storageFunction.fillingMemoryByMapCollection("-", rez2);
                 break;
             case "*":
                 double rez3 = multiple.action(a, b);
-                fillingMemory(rez3);
+                storageFunction.fillingMemoryByArray(rez3);
+                storageFunction.fillingMemoryByCollection(rez3);
+                storageFunction.fillingMemoryByMapCollection("*", rez3);
                 break;
             case "/":
                 double rez4 = div.action(a, b);
-                fillingMemory(rez4);
+                storageFunction.fillingMemoryByArray(rez4);
+                storageFunction.fillingMemoryByCollection(rez4);
+                storageFunction.fillingMemoryByMapCollection("/", rez4);
                 break;
             default:
                 System.out.println(" The operation can not be processed. Try to enter '+','-','*','/'");
                 throw new IllegalArgumentException();
-        }
-    }
-
-    private void fillingMemory(double num) {
-        for (; point < memory.length; ) {
-            memory[point] = num;
-            point++;
-            break;
-        }
-
-        if (point == memory.length) {
-            point = 0;
-        }
-    }
-
-    private void printArray(double[] array) {
-        for (double element : array) {
-            System.out.print(element + "  ");
         }
     }
 }
